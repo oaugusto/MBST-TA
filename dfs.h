@@ -1,10 +1,10 @@
 #ifndef DFS_H
 #define DFS_H
 
-void dfs(int node, int* visited, graph g, int size);
+#include "graph.h"
 
-int isConnectDFS(graph g, int size);
+void dfs(int node, int* visited, graph* g);
 
-graph connectedComponets(graph g, int size);
+int isConnectDFS(graph* g);
 
 #endif

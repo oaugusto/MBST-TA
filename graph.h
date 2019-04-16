@@ -5,20 +5,24 @@ typedef struct edge* pointer;
 
 typedef struct edge {
     int id;
-    int weight;
+    float weight;
     pointer next;
 } edge;
 
-typedef pointer* graph;
+typedef struct graph {
+    int nNodes;
+    int nEdges;
+    pointer edges[]; 
+} graph;
 
-pointer* makeGraph(int size);
+graph* makeGraph(int size);
 
-void insertEdge(graph g, int a, int b, int w);
+void insertEdge(graph* g, int a, int b, float w);
 
-//void removeEdge(graph g, int a, int b);
+//void removeEdge(graph* g, int a, int b);
 
-void printGraph(graph g, int size);
+void printGraph(graph* g, int size);
 
-void removeGraph(graph g, int size);
+void removeGraph(graph* g, int size);
 
 #endif

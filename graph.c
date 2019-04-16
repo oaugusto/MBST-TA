@@ -1,27 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "graph.h"
 
-graph makeGraph(int size) {
+graph* makeGraph(int size) {
     int i = 0;
 
-    if (size > 0) {
-        graph g = (pointer*)malloc(size * sizeof(pointer));
-        
-        for (i = 0; i < size; i++) {
-            g[i] = NULL;
-        }
-
-        return g;
-    
-    } else {
-
+    if (size < 0) {
         return NULL;
-    
     }
+
+    //graph struct
+    graph* g = (graph*)malloc(sizeof(graph));
+    
+    g->nNodes = size;
+    g->nEdges = 0;
+
+    //adjacent list of edges
+    g->edges = (pointer*)malloc(size * sizeof(pointer));
+
+    for (i = 0; i < size; i++) {
+        g->edges[i] = NULL;
+    }
+
+    return g;
 }
 
-void insertEdge(graph g, int a, int b, int w) {
+void insertEdge(graph* g, int a, int b, float w) {
+
     if (a < 0 || b < 0) {
         return;
     }
@@ -29,20 +35,22 @@ void insertEdge(graph g, int a, int b, int w) {
     pointer e = (pointer)malloc(sizeof(edge));
     e->id = b;
     e->weight = w;
-    e->next = g[a];
-    g[a] = e;
+    e->next = g->edges[a];
+    g->edges[a] = e;
+
+    g->nEdges++;
 
 }
 
-void printGraph(graph g, int size) {
+void printGraph(graph* g) {
     int i = 0;
     pointer next = NULL;
 
-    for (i = 0; i < size; i++) {
+    for (i = 0; i < g->nNodes; i++) {
 
         printf("node %d:", i);
 
-        for (next = g[i]; next != NULL; next = next->next) {
+        for (next = g->edges[i]; next != NULL; next = next->next) {
             printf(" %d", next->id);
         }
 
@@ -51,12 +59,14 @@ void printGraph(graph g, int size) {
 
 }
 
-void removeGraph(graph g, int size) {
+void removeGraph(graph* g) {
     int i = 0;
     pointer next = NULL;
     pointer tmp = NULL;
 
-    for (i = 0; i < size; i++) {
+    for (i = 0; i < g->nNodes; i++) {
+
+        next = g->edges[i];
 
         while (next != NULL) {
             tmp = next;
@@ -65,4 +75,6 @@ void removeGraph(graph g, int size) {
         }
 
     }
+
+    free(g);
 }
