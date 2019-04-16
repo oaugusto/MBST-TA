@@ -35,7 +35,7 @@ graph* createSubGraph(graph* g, float median) {
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[0]; next != NULL; next = next->next) {
             if (next->weight <= median) {
-                insertEdge(g_sub, i, next->id);
+                insertEdge(g_sub, i, next->id, next->weight);
             } 
         }
     }
@@ -73,13 +73,13 @@ graph* connectedComponets(graph* g, graph* g_sub) {
     int* visited = (int*)calloc(g_sub->nNodes, sizeof(int));
     int* sets = (int*)calloc(g_sub->nNodes, sizeof(int));
 
-    //DFS
+    //DFS: visit all nodes and label each one with the right component
     for (i = 0; i < g_sub->nNodes; i++) {
         dfs(i, color, visited, sets, g_sub);
         color++;
     }
 
-    n_g = makeGraph(color - 1);
+    n_g = makeGraph(color);
 
     //add all edges not in the same component
     for (i = 0; i < g->nNodes; i++) {
@@ -98,6 +98,8 @@ graph* connectedComponets(graph* g, graph* g_sub) {
 
 
 float mbst(graph* g) {
+    int i = 0;
+    pointer next = NULL;
 
     float bottleneck = 0;
 
@@ -106,7 +108,14 @@ float mbst(graph* g) {
     graph* components = NULL;
 
     if (g->nEdges == 1) {
-        /*return edge*/
+        
+        //find the first and unique edge 
+        for (i = 0; i < g->nNodes; i++) {
+            for (next = g->edges[i]; next != NULL; next = next->next) {
+                return next->weight;
+            }
+        }
+
     } else {
 
         median = getMedianOfEdges(g);
