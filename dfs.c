@@ -41,3 +41,8 @@ int isConnectDFS(graph g, int size) {
     free(visited);
     return 1;
 }
+
+
+graph connectedComponets(graph g, int size) {
+    
+}
