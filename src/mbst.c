@@ -54,7 +54,7 @@ void dfsGroupNodes(int node, int color, int* visited, int* sets, graph* g) {
     visited[node] = 1;
     sets[node] = color;
 
-    //for each each leaving node 
+    //for each edge leaving the node 
     for (next = g->edges[node]; next != NULL; next = next->next) {
         //if visited for the first time
         if (visited[next->id] == 0) {
@@ -104,26 +104,61 @@ graph* connectedComponents(graph* g, graph* g_sub) {
 }
 
 
-float mbst(graph* g) {
+int allEqualsWeights(graph* g) {
+    int i = 0;
+    pointer next = NULL;
+    
+    float weight = -1;
+
+    for (i = 0; i < g->nNodes; i++) {
+        for (next = g->edges[i]; next != NULL; next = next->next) {
+            //first time
+            if (weight == -1) {
+                weight = next->weight;
+            }
+
+            if (weight != next->weight) {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
+float weightOfFirstEdge(graph* g) {
     int i = 0;
     pointer next = NULL;
 
+    //find the first and unique edge 
+    for (i = 0; i < g->nNodes; i++) {
+        for (next = g->edges[i]; next != NULL; next = next->next) {
+            return next->weight;
+        }
+    }
+
+    return 0;
+}
+
+float mbst(graph* g) {
+    
     float bottleneck = 0;
 
     float median = 0;
     graph* g_sub = NULL;
     graph* components = NULL;
 
-    if (g->nEdges == 1) {
-        
-        //find the first and unique edge 
-        for (i = 0; i < g->nNodes; i++) {
-            for (next = g->edges[i]; next != NULL; next = next->next) {
-                return next->weight;
-            }
-        }
+    if (g->nEdges == 1) {        
 
+        return weightOfFirstEdge(g);
+    
     } else {
+
+        if (allEqualsWeights(g)) {
+        
+           return weightOfFirstEdge(g);
+        
+        }
 
         median = getMedianOfEdges(g);
         g_sub = createSubGraph(g, median);

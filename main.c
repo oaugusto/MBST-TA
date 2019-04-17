@@ -14,11 +14,11 @@ int main(int argc, char* argv[]) {
     //graph* g_sub = NULL;
     graph* g = makeGraph(graphSize);
 
-    insertEdge(g, 0, 1, 1);
-    insertEdge(g, 1, 2, 2);
-    insertEdge(g, 2, 3, 3);
-    insertEdge(g, 3, 4, 5);
-    insertEdge(g, 0, 2, 5);
+    insertEdge(g, 0, 1, 10);
+    insertEdge(g, 1, 2, 10);
+    insertEdge(g, 2, 3, 10);
+    insertEdge(g, 3, 4, 10);
+    insertEdge(g, 0, 2, 10);
 
     printGraph(g);
 
@@ -48,4 +48,10 @@ int main(int argc, char* argv[]) {
     printf("connected:\n");
     com = connectedComponents(g, g_sub);
     printGraph(com);
+
+    insertEdge(g, 0, 1, 1);
+    insertEdge(g, 1, 2, 2);
+    insertEdge(g, 2, 3, 3);
+    insertEdge(g, 3, 4, 5);
+    insertEdge(g, 0, 2, 5);
 */
