@@ -12,7 +12,7 @@ typedef struct edge {
 typedef struct graph {
     int nNodes;
     int nEdges;
-    pointer edges[]; 
+    pointer* edges; 
 } graph;
 
 graph* makeGraph(int size);
