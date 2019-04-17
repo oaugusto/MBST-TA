@@ -9,30 +9,28 @@
 
 int main(int argc, char* argv[]) {
 
-    int graphSize = 5;
-    //float median = 0;
-    //graph* g_sub = NULL;
+    int graphSize = 7;
+    
     graph* g = makeGraph(graphSize);
 
-    insertEdge(g, 0, 1, 10);
-    insertEdge(g, 1, 2, 10);
-    insertEdge(g, 2, 3, 10);
-    insertEdge(g, 3, 4, 10);
-    insertEdge(g, 0, 2, 10);
+    //0a 1b 2c 3d 4e 5f 6g wikipedia graph
+    insertEdge(g, 0, 1, 7);//ab
+    insertEdge(g, 0, 3, 5);//ad
+    insertEdge(g, 3, 1, 9);//db
+    insertEdge(g, 1, 2, 8);//bc
+    insertEdge(g, 1, 4, 7);//be
+    insertEdge(g, 2, 4, 5);//ce
+    insertEdge(g, 3, 4, 15);//de
+    insertEdge(g, 3, 5, 6);//df
+    insertEdge(g, 4, 5, 8);//ef
+    insertEdge(g, 4, 6, 7);//eg
+    insertEdge(g, 5, 6, 11);//fg
 
     printGraph(g);
-
-    printf("\nnumber of edges: %d\n", g->nEdges);
     
-    printf("bottleneck:%f\n", mbst(g));
-    //median = getMedianOfEdges(g);
-    //g_sub = createSubGraph(g, median);
-    
-    //printf("subgraph:\n");
-    //printGraph(g_sub);
-
+    printf("\nbottleneck:%f\n", mbst(g));
+   
     removeGraph(g);
-    //removeGraph(g_sub);
 
     return 0;
 }
