@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "mbst.h"
-#include "median.h"
+#include "../include/mbst.h"
+#include "../include/median.h"
 
 float getMedianOfEdges(graph* g) {
     int i = 0, j = 0;
@@ -44,7 +44,7 @@ graph* createSubGraph(graph* g, float median) {
 
 }
 
-void dfs(int node, int color, int* visited, int* sets, graph* g) {
+void dfsGroupNodes(int node, int color, int* visited, int* sets, graph* g) {
     pointer next = NULL;
 
     visited[node] = 1;
@@ -54,7 +54,7 @@ void dfs(int node, int color, int* visited, int* sets, graph* g) {
     for (next = g->edges[node]; next != NULL; next = next->next) {
         //if visited for the first time
         if (visited[next->id] == 0) {
-            dfs(next->id, color, visited, sets, g);
+            dfsGroupNodes(next->id, color, visited, sets, g);
         }
     }
 }
@@ -76,7 +76,7 @@ graph* connectedComponents(graph* g, graph* g_sub) {
     //DFS: visit all nodes and label each one with the right component
     for (i = 0; i < g_sub->nNodes; i++) {
 	if (visited[i] == 0) {
-            dfs(i, color, visited, sets, g_sub);
+            dfsGroupNodes(i, color, visited, sets, g_sub);
             color++;
 	}
     }

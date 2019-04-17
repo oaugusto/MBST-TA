@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "graph.h"
+#include "../include/graph.h"
 
 graph* makeGraph(int size) {
     int i = 0;

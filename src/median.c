@@ -1,4 +1,4 @@
-#include "median.h"
+#include "../include/median.h"
 
 float median_find(float* x, int n) {
     float temp;

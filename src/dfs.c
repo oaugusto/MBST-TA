@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "graph.h"
-#include "dfs.h"
+#include "../include/graph.h"
+#include "../include/dfs.h"
 
 
 void dfs(int node, int* visited, graph* g) {
