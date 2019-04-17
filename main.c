@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
 
     //printf("%d\n", isConnectDFS(g, n));
     
-    removeGraph(g, n);
+    removeGraph(g);
 
     return 0;
 }
