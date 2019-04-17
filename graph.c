@@ -29,6 +29,7 @@ graph* makeGraph(int size) {
 void insertEdge(graph* g, int a, int b, float w) {
 
     if (a < 0 || b < 0) {
+	    printf("erro\n");
         return;
     }
 

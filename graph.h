@@ -21,8 +21,8 @@ void insertEdge(graph* g, int a, int b, float w);
 
 //void removeEdge(graph* g, int a, int b);
 
-void printGraph(graph* g, int size);
+void printGraph(graph* g);
 
-void removeGraph(graph* g, int size);
+void removeGraph(graph* g);
 
 #endif
