@@ -8,7 +8,7 @@
 int main(int argc, char* argv[]) {
 
     int n = 5;
-    graph g = makeGraph(n);
+    graph* g = makeGraph(n);
 
     //insertEdge(g, 0, 1, 10);
     //insertEdge(g, 1, 2, 10);
