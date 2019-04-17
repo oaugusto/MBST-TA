@@ -4,13 +4,13 @@
 #include "graph.h"
 #include "median.h"
 
-//float getMedianOfEdges(graph* g);
+float getMedianOfEdges(graph* g);
 
-//graph* createSubGraph(graph* g, float median);
+graph* createSubGraph(graph* g, float median);
 
-//void dfs(int node, int color, int* visited, int* sets, graph* g);
+void dfsGroupNodes(int node, int color, int* visited, int* sets, graph* g);
 
-//graph* connectedComponents(graph* g, graph* g_sub);
+graph* connectedComponents(graph* g, graph* g_sub);
 
 float mbst(graph* g);
 

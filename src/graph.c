@@ -26,19 +26,52 @@ graph* makeGraph(int size) {
     return g;
 }
 
+int isEdge(graph* g, int a, int b) {
+    pointer next = NULL;
+
+    if (a < 0 || b < 0) {
+        printf("erro: isEdge\n");
+        return -1;
+    }
+
+    next = g->edges[a];
+
+    while (next != NULL) {
+        if (next->id == b) {
+            return 1;
+        }
+
+        next = next->next;
+    }
+
+    return 0;
+
+}
+
 void insertEdge(graph* g, int a, int b, float w) {
 
     if (a < 0 || b < 0) {
-	    printf("erro\n");
+	    printf("erro: insertEdge\n");
         return;
     }
 
-    pointer e = (pointer)malloc(sizeof(edge));
-    e->id = b;
-    e->weight = w;
-    e->next = g->edges[a];
-    g->edges[a] = e;
+    pointer e1 = (pointer)malloc(sizeof(edge));
+    pointer e2 = (pointer)malloc(sizeof(edge));
 
+    //insert first edge
+    e1->id = b;
+    e1->weight = w;
+    e1->next = g->edges[a];
+    g->edges[a] = e1;
+
+    //second edge
+    e2->id = a;
+    e2->weight = w;
+    e2->next = g->edges[b];
+    g->edges[b] = e2;
+
+    //increment the number of edges,
+    //considering only one edge between
     g->nEdges++;
 
 }

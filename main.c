@@ -10,24 +10,32 @@
 int main(int argc, char* argv[]) {
 
     int graphSize = 5;
+    //float median = 0;
+    //graph* g_sub = NULL;
     graph* g = makeGraph(graphSize);
 
     insertEdge(g, 0, 1, 1);
-    insertEdge(g, 1, 0, 1);
+    //insertEdge(g, 1, 0, 1);
     insertEdge(g, 1, 2, 2);
-    insertEdge(g, 2, 1, 2);
+    //insertEdge(g, 2, 1, 2);
     insertEdge(g, 2, 3, 3);
-    insertEdge(g, 3, 2, 3);
+    //insertEdge(g, 3, 2, 3);
     insertEdge(g, 3, 4, 4);
-    insertEdge(g, 4, 3, 4);
+    //insertEdge(g, 4, 3, 4);
 
     printGraph(g);
 
-    printf("%d\n", g->nEdges);
+    printf("\nnumber of edges: %d\n", g->nEdges);
     
     printf("bottleneck:%f\n", mbst(g));
+    //median = getMedianOfEdges(g);
+    //g_sub = createSubGraph(g, median);
     
+    //printf("subgraph:\n");
+    //printGraph(g_sub);
+
     removeGraph(g);
+    //removeGraph(g_sub);
 
     return 0;
 }

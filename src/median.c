@@ -1,6 +1,6 @@
 #include "../include/median.h"
 
-float median_find(float* x, int n) {
+float medianFind(float* x, int n) {
     float temp;
     int i, j;
     // the following two loops sort the array x in ascending order
