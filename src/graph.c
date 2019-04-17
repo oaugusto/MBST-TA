@@ -55,6 +55,10 @@ void insertEdge(graph* g, int a, int b, float w) {
         return;
     }
 
+    if (isEdge(g, a, b)) {
+        return;
+    }
+
     pointer e1 = (pointer)malloc(sizeof(edge));
     pointer e2 = (pointer)malloc(sizeof(edge));
 

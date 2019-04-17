@@ -38,7 +38,7 @@ graph* createSubGraph(graph* g, float median) {
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             //the edge doesn't exist and the weight is not greater than median
-            if ((!isEdge(g_sub, i, next->id)) && next->weight <= median) {
+            if (next->weight <= median) {
                 insertEdge(g_sub, i, next->id, next->weight);
             } 
         }
@@ -91,7 +91,7 @@ graph* connectedComponents(graph* g, graph* g_sub) {
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             //the edge doesn't exist yet and the vertexes is not in the same set
-            if (sets[i] != sets[next->id] && (!isEdge(n_g, sets[i], sets[next->id]))) {
+            if (sets[i] != sets[next->id]) {
                 insertEdge(n_g, sets[i], sets[next->id], next->weight);
             }
         }
