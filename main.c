@@ -30,15 +30,15 @@ int main(int argc, char* argv[]) {
     cities = (place*)malloc(n * sizeof(place));
 
     for (i = 0; i < n; i++) {
-        fscanf(fp, "%lf %lf", &cities[i]->latitude, &cities[i]->longitude);
+        fscanf(fp, "%lf %lf", &(cities[i].latitude), &(cities[i].longitude));
     }
     
     graph* g = makeGraph(n);
 
-    for (i = n; i >= 0; i--) {
+    for (i = n - 1; i >= 0; i--) {
         for (j = 0; j < i; j++) {
-            insertEdge(g, i, j, distanceEarthKm(cities[i]->latitude, 
-                        cities[i]->longitude, cities[j]->latitude, cities[j]->longitude));
+            insertEdge(g, i, j, distanceEarthKm(cities[i].latitude, 
+                        cities[i].longitude, cities[j].latitude, cities[j].longitude));
         }
     }
     
