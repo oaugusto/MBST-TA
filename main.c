@@ -9,7 +9,7 @@
 
 int main(int argc, char* argv[]) {
 
-    int graphSize = 7;
+    int graphSize = 5;
     
     graph* g = makeGraph(graphSize);
 
@@ -52,4 +52,11 @@ int main(int argc, char* argv[]) {
     insertEdge(g, 2, 3, 3);
     insertEdge(g, 3, 4, 5);
     insertEdge(g, 0, 2, 5);
+
+    insertEdge(g, 0, 1, 10);
+    insertEdge(g, 1, 2, 10);
+    insertEdge(g, 2, 3, 10);
+    insertEdge(g, 3, 4, 10);
+    insertEdge(g, 0, 2, 10);
+
 */

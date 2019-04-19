@@ -50,8 +50,8 @@ int isEdge(graph* g, int a, int b) {
 
 void insertEdge(graph* g, int a, int b, float w) {
 
-    if (a < 0 || b < 0) {
-	    printf("erro: insertEdge\n");
+    if (a < 0 || b < 0 || a >= g->nNodes || b >= g->nNodes) {
+        printf("erro: insertEdge(invalid values: %d, %d)\n", a, b);
         return;
     }
 

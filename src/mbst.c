@@ -39,7 +39,12 @@ graph* createSubGraph(graph* g, float median) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             //the edge doesn't exist and the weight is not greater than median
             if (next->weight <= median) {
+
                 insertEdge(g_sub, i, next->id, next->weight);
+		
+		if (g_sub->nEdges >= (g->nEdges/2)) {
+		   return g_sub;
+		}
             } 
         }
     }
@@ -104,28 +109,6 @@ graph* connectedComponents(graph* g, graph* g_sub) {
 }
 
 
-int allEqualsWeights(graph* g) {
-    int i = 0;
-    pointer next = NULL;
-    
-    float weight = -1;
-
-    for (i = 0; i < g->nNodes; i++) {
-        for (next = g->edges[i]; next != NULL; next = next->next) {
-            //first time
-            if (weight == -1) {
-                weight = next->weight;
-            }
-
-            if (weight != next->weight) {
-                return 0;
-            }
-        }
-    }
-
-    return 1;
-}
-
 float weightOfFirstEdge(graph* g) {
     int i = 0;
     pointer next = NULL;
@@ -139,6 +122,7 @@ float weightOfFirstEdge(graph* g) {
 
     return 0;
 }
+
 
 float mbst(graph* g) {
     
@@ -154,21 +138,9 @@ float mbst(graph* g) {
     
     } else {
 
-        if (allEqualsWeights(g)) {
-        
-           return weightOfFirstEdge(g);
-        
-        }
-
         median = getMedianOfEdges(g);
         g_sub = createSubGraph(g, median);
         components = connectedComponents(g, g_sub);
-
-        //printf("subgraph:%d\n", g_sub->nNodes);
-        //printGraph(g_sub);
-        //printf("componentes:%d\n",components->nNodes);
-        //printGraph(components);
-        //printf("\n\n");
 
         if (components->nNodes == 1) {
             
@@ -193,3 +165,11 @@ float mbst(graph* g) {
     return bottleneck;
 
 }
+
+
+//printf("subgraph:%d\n", g_sub->nNodes);
+//printGraph(g_sub);
+//printf("componentes:%d\n",components->nNodes);
+//printGraph(components);
+//printf("\n\n");
+

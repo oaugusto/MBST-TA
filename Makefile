@@ -21,3 +21,4 @@ all: $(OBJ)
 
 clean:
 	rm -f $(ODIR)/*.o
+	rm *.o
