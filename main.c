@@ -42,9 +42,9 @@ int main(int argc, char* argv[]) {
         }
     }
     
-    printGraph(g);
+    // printGraph(g);
     
-    printf("\nbottleneck:%f\n", mbst(g));
+    printf("%d\n", (int) mbst(g));
    
     removeGraph(g);
 
