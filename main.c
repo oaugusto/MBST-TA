@@ -5,6 +5,7 @@
 #include "include/median.h"
 #include "include/mbst.h"
 #include "include/distance.h"
+#include "include/mst.h"
 
 typedef struct place {
     double latitude;
@@ -41,11 +42,12 @@ int main(int argc, char* argv[]) {
                         cities[i].longitude, cities[j].latitude, cities[j].longitude));
         }
     }
+
+    printGraph(g);
     
-    // printGraph(g);
-    
-    printf("%d\n", (int) mbst(g));
-   
+    printf("\nbottleneck1:%f\n", mbst(g));
+    printf("\nbottleneck2:%f\n", mst_prim(g));
+
     removeGraph(g);
 
     free(cities);
