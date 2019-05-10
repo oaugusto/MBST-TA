@@ -38,13 +38,13 @@ graph* createSubGraph(graph* g, float median) {
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             //the edge doesn't exist and the weight is not greater than median
-            if (next->weight <= median) {
+            if (!isEdge(g_sub, i, next->id) && next->weight <= median) {
 
                 insertEdge(g_sub, i, next->id, next->weight);
 		
-		if (g_sub->nEdges >= (g->nEdges/2)) {
-		   return g_sub;
-		}
+                if (g_sub->nEdges > (g->nEdges/2)) {
+                    return g_sub;
+                }
             } 
         }
     }
@@ -114,6 +114,7 @@ float weightOfFirstEdge(graph* g) {
     pointer next = NULL;
 
     //find the first and unique edge 
+    printGraph(g);
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             return next->weight;

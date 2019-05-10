@@ -14,11 +14,15 @@ typedef struct place {
 
 int main(int argc, char* argv[]) {
 
-    int n, i, j;
-    double p1, p2;
+    int n = 0, i = 0, j = 0;
+    double p1 = 0, p2 = 0;
 
-    FILE *fp;
-    place* cities; //keep cities latitude and longitute
+    int* car;
+
+    FILE *fp = NULL;
+    place* cities = NULL; //keep cities latitude and longitute
+
+    graph* g = NULL;
 
     if (argc < 2) {
         printf("erro: missing parameters\n");
@@ -34,7 +38,7 @@ int main(int argc, char* argv[]) {
         fscanf(fp, "%lf %lf", &(cities[i].latitude), &(cities[i].longitude));
     }
     
-    graph* g = makeGraph(n);
+    g = makeGraph(n);
 
     for (i = n - 1; i >= 0; i--) {
         for (j = 0; j < i; j++) {
@@ -43,7 +47,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    printGraph(g);
+    // printGraph(g);
     
     printf("\nbottleneck1:%f\n", mbst(g));
     printf("\nbottleneck2:%f\n", mst_prim(g));

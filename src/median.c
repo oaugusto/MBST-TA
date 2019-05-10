@@ -1,8 +1,12 @@
+#include <stdio.h>
 #include "../include/median.h"
 
 float medianFind(float* x, int n) {
     float temp;
     int i, j;
+
+    float median = -1;
+
     // the following two loops sort the array x in ascending order
     for(i=0; i< n-1; i++) {
         for(j=i+1; j<n; j++) {
@@ -15,11 +19,12 @@ float medianFind(float* x, int n) {
         }
     }
 
-    if(n%2==0) {
-        // if there is an even number of elements, return mean of the two elements in the middle
-        return((x[n/2] + x[n/2 - 1]) / 2.0);
-    } else {
-        // else return the element in the middle
-        return x[n/2];
+    median = (n % 2 == 0) ? ((x[n/2] + x[n/2 - 1]) / 2.0): x[n/2];
+
+    for (i = 0; i < n; i++) {
+        printf("%.0f ", x[i]);
     }
+    printf("\nMedian: %.0f\n\n", median);
+
+    return median;
 }

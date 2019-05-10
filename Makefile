@@ -1,5 +1,5 @@
-CC=gcc
-CFLAGS=-lm -I $(IDIR)
+CC=gcc -g
+CFLAGS= -lm -I $(IDIR)
 
 IDIR = include
 ODIR = obj
@@ -15,10 +15,10 @@ $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 all: $(OBJ)
-	$(CC) -o main.o main.c $^ $(CFLAGS)
+	$(CC) -o main.out main.c $^ $(CFLAGS)
 
 .PHONY: clean
 
 clean:
 	rm -f $(ODIR)/*.o
-	rm *.o
+	rm *.out
