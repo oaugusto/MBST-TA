@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <float.h>
 
 #include "../include/mbst.h"
 #include "../include/median.h"
 
+//O(E)
 float getMedianOfEdges(graph* g) {
     int i = 0, j = 0;
     pointer next = NULL;
@@ -28,24 +30,31 @@ float getMedianOfEdges(graph* g) {
     return  median;
 }
 
+//O(E)
 graph* createSubGraph(graph* g, float median) {
     int i = 0;
     pointer next = NULL;
 
     graph* g_sub = makeGraph(g->nNodes);
 
-    //for each edge that has weight less or equal than media add
+    //for each edge that has weight less than median add
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             //the edge doesn't exist and the weight is not greater than median
-            if (!isEdge(g_sub, i, next->id) && next->weight <= median) {
-
+            if ((i < next->id) && next->weight < median) {
                 insertEdge(g_sub, i, next->id, next->weight);
-		
-                if (g_sub->nEdges > (g->nEdges/2)) {
-                    return g_sub;
-                }
-            } 
+            }
+        }
+    }
+
+    //for each edge that has weight equal to median add
+    for (i = 0; i < g->nNodes; i++) {
+        for (next = g->edges[i]; next != NULL; next = next->next) {
+            //the edge doesn't exist and the weight is not greater than median
+            if ((i < next->id) && next->weight == median) {
+                if (g_sub->nEdges >= (g->nEdges/2)) return g_sub;
+                insertEdge(g_sub, i, next->id, next->weight);
+            }
         }
     }
 
@@ -53,6 +62,7 @@ graph* createSubGraph(graph* g, float median) {
 
 }
 
+//O(E)
 void dfsGroupNodes(int node, int color, int* visited, int* sets, graph* g) {
     pointer next = NULL;
 
@@ -68,6 +78,7 @@ void dfsGroupNodes(int node, int color, int* visited, int* sets, graph* g) {
     }
 }
 
+//O(V + E)
 //generate a graph with each vertex is a connected component
 graph* connectedComponents(graph* g, graph* g_sub) {
     int i = 0;
@@ -96,7 +107,7 @@ graph* connectedComponents(graph* g, graph* g_sub) {
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             //the edge doesn't exist yet and the vertexes is not in the same set
-            if (sets[i] != sets[next->id]) {
+            if ((i < next->id) && sets[i] != sets[next->id]) {
                 insertEdge(n_g, sets[i], sets[next->id], next->weight);
             }
         }
@@ -114,7 +125,7 @@ float weightOfFirstEdge(graph* g) {
     pointer next = NULL;
 
     //find the first and unique edge 
-    printGraph(g);
+    // printGraph(g);
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             return next->weight;
@@ -164,13 +175,4 @@ float mbst(graph* g) {
     }
 
     return bottleneck;
-
 }
-
-
-//printf("subgraph:%d\n", g_sub->nNodes);
-//printGraph(g_sub);
-//printf("componentes:%d\n",components->nNodes);
-//printGraph(components);
-//printf("\n\n");
-

@@ -42,8 +42,9 @@ int main(int argc, char* argv[]) {
 
     for (i = n - 1; i >= 0; i--) {
         for (j = 0; j < i; j++) {
-            insertEdge(g, i, j, distanceEarthKm(cities[i].latitude, 
-                        cities[i].longitude, cities[j].latitude, cities[j].longitude));
+            int dist = distanceEarthKm(cities[i].latitude, 
+                        cities[i].longitude, cities[j].latitude, cities[j].longitude);
+            insertEdge(g, i, j, dist);
         }
     }
 
