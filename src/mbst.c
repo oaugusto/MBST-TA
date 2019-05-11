@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <float.h>
 
+#include "../include/types.h"
 #include "../include/mbst.h"
 #include "../include/median.h"
 
 //O(E)
 float getMedianOfEdges(graph* g) {
-    int i = 0, j = 0;
+    V_t i = 0, j = 0;
     pointer next = NULL;
 
     float median = 0;
@@ -18,7 +19,7 @@ float getMedianOfEdges(graph* g) {
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             if (i < next->id) {
-                weights[j] = next->weight;
+                weights[j] = (float)next->weight;
                 j++;
             }
         }
@@ -32,7 +33,7 @@ float getMedianOfEdges(graph* g) {
 
 //O(E)
 graph* createSubGraph(graph* g, float median) {
-    int i = 0;
+    V_t i = 0;
     pointer next = NULL;
 
     graph* g_sub = makeGraph(g->nNodes);
@@ -41,7 +42,7 @@ graph* createSubGraph(graph* g, float median) {
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             //the edge doesn't exist and the weight is not greater than median
-            if ((i < next->id) && next->weight < median) {
+            if ((i < next->id) && (float)(next->weight) < median) {
                 insertEdge(g_sub, i, next->id, next->weight);
             }
         }
@@ -51,7 +52,7 @@ graph* createSubGraph(graph* g, float median) {
     for (i = 0; i < g->nNodes; i++) {
         for (next = g->edges[i]; next != NULL; next = next->next) {
             //the edge doesn't exist and the weight is not greater than median
-            if ((i < next->id) && next->weight == median) {
+            if ((i < next->id) && (float)(next->weight) == median) {
                 if (g_sub->nEdges >= (g->nEdges/2)) return g_sub;
                 insertEdge(g_sub, i, next->id, next->weight);
             }
@@ -63,7 +64,7 @@ graph* createSubGraph(graph* g, float median) {
 }
 
 //O(E)
-void dfsGroupNodes(int node, int color, int* visited, int* sets, graph* g) {
+void dfsGroupNodes(V_t node, int color, int* visited, int* sets, graph* g) {
     pointer next = NULL;
 
     visited[node] = 1;
@@ -81,7 +82,7 @@ void dfsGroupNodes(int node, int color, int* visited, int* sets, graph* g) {
 //O(V + E)
 //generate a graph with each vertex is a connected component
 graph* connectedComponents(graph* g, graph* g_sub) {
-    int i = 0;
+    V_t i = 0;
     pointer next = NULL;
 
     //one color for each component
@@ -119,35 +120,18 @@ graph* connectedComponents(graph* g, graph* g_sub) {
     return n_g;
 }
 
-
-float weightOfFirstEdge(graph* g) {
-    int i = 0;
-    pointer next = NULL;
-
-    //find the first and unique edge 
-    // printGraph(g);
-    for (i = 0; i < g->nNodes; i++) {
-        for (next = g->edges[i]; next != NULL; next = next->next) {
-            return next->weight;
-        }
-    }
-
-    return 0;
-}
-
-
-float mbst(graph* g) {
+//O(E)
+W_t mbst(graph* g) {
     
-    float bottleneck = 0;
+    W_t bottleneck = 0;
 
     float median = 0;
     graph* g_sub = NULL;
     graph* components = NULL;
 
     if (g->nEdges == 1) {        
-
-        return weightOfFirstEdge(g);
-    
+        pointer vertex = g->edges[0];
+        return vertex->weight;
     } else {
 
         median = getMedianOfEdges(g);

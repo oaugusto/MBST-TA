@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../include/types.h"
 #include "../include/graph.h"
 
 graph* makeGraph(int size) {
-    int i = 0;
+    V_t i = 0;
 
     if (size < 0) {
         return NULL;
@@ -48,7 +49,7 @@ int isEdge(graph* g, int a, int b) {
 
 }
 
-void insertEdge(graph* g, int a, int b, float w) {
+void insertEdge(graph* g, int a, int b, W_t w) {
 
     if (a < 0 || b < 0 || a >= g->nNodes || b >= g->nNodes) {
         printf("erro: insertEdge(invalid values: %d, %d)\n", a, b);

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "include/types.h"
 #include "include/graph.h"
 #include "include/median.h"
 #include "include/mbst.h"
@@ -16,8 +17,6 @@ int main(int argc, char* argv[]) {
 
     int n = 0, i = 0, j = 0;
     double p1 = 0, p2 = 0;
-
-    int* car;
 
     FILE *fp = NULL;
     place* cities = NULL; //keep cities latitude and longitute
@@ -50,8 +49,8 @@ int main(int argc, char* argv[]) {
 
     // printGraph(g);
     
-    printf("\nbottleneck1:%f\n", mbst(g));
-    printf("\nbottleneck2:%f\n", mst_prim(g));
+    printf("bottleneck for Camerini algorthm: %d\n", mbst(g));
+    printf("bottleneck for Prim algorithm: %d\n", mst_prim(g));
 
     removeGraph(g);
 

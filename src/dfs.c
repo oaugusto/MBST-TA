@@ -21,8 +21,8 @@ void dfs(int node, int* visited, graph* g) {
 
 //return 1 if the graph is connected or 0 otherwise
 int isConnectDFS(graph* g) {
-    int i = 0;
-    int* visited = (int*)calloc(g->nNodes, sizeof(int));
+    V_t i = 0;
+    V_t* visited = (V_t*)calloc(g->nNodes, sizeof(V_t));
 
     //DFS
     dfs(0, visited, g);

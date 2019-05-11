@@ -12,6 +12,6 @@ void dfsGroupNodes(int node, int color, int* visited, int* sets, graph* g);
 
 graph* connectedComponents(graph* g, graph* g_sub);
 
-float mbst(graph* g);
+W_t mbst(graph* g);
 
 #endif

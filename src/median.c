@@ -20,11 +20,11 @@ float medianFind(float* x, int n) {
     }
 
     median = (n % 2 == 0) ? ((x[n/2] + x[n/2 - 1]) / 2.0): x[n/2];
-
+/* 
     for (i = 0; i < n; i++) {
         printf("%.0f ", x[i]);
     }
     printf("\nMedian: %.0f\n\n", median);
-
+ */
     return median;
 }

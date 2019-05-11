@@ -1,10 +1,12 @@
 #ifndef MST_H
 #define MST_H
 
+#include <limits.h>
+#include "types.h"
 #include "graph.h"
 
-#define INF 2147483647
+#define INF INT_MAX
 
-float mst_prim(graph *g);
+W_t mst_prim(graph *g);
 
 #endif

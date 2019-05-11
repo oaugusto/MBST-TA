@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../include/types.h"
 #include "../include/graph.h"
 #include "../include/mst.h"
 
-float mst_prim(graph *g) {
+W_t mst_prim(graph *g) {
     int i = 0, j = 0, counter = 0, min_value = 0, min_index = 0;
     pointer next = NULL;
     int *parent = NULL;
@@ -12,7 +13,6 @@ float mst_prim(graph *g) {
     int *removed = NULL;
 
     int max = 0;
-
 
     parent = (int*)malloc(g->nNodes * sizeof(int));
     key = (int*)malloc(g->nNodes * sizeof(int));
