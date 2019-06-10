@@ -10,7 +10,7 @@ correct = 0
 for i in range(1,11):
     try:
         result = subprocess.run(['./' + executable_path, 
-                                os.path.join(dirname, 'dataset/cidades{}.txt'.format(i)),
+                                os.path.join(dirname, 'dataset/cidades{}.txt'.format(i))],
             stdout=subprocess.PIPE, timeout=60)
     except subprocess.TimeoutExpired:
         print('case {} timeout!'.format(i))
